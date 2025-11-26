@@ -1,27 +1,33 @@
 package org.example;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "divisions") // Cambiar a "divisions" (con s)
+@Table(name = "divisions")
 public class Division {
 
     @Id
-    @Column(name = "division") // Esta es la columna ID según tu estructura
+    @Column(name = "division")
     private String division;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "country")
-    private String country;
+    @Column(name = "Country")
+    private String Pais;
 
-    public Division() {}
+    @OneToMany(mappedBy = "division")
+    private List<Match> match;
 
-    public Division(String division, String name, String country) {
+    public Division(String division, String name, String Pais) {
         this.division = division;
         this.name = name;
-        this.country = country;
+        this.Pais = Pais;
+    }
+
+    public Division() {
+
     }
 
     // Getters y Setters
@@ -31,11 +37,11 @@ public class Division {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public String getCountry() { return country; }
-    public void setCountry(String country) { this.country = country; }
+    public String getPais() { return Pais; }
+    public void setPais(String pais) { this.Pais = pais; }
 
     @Override
     public String toString() {
-        return "Division{division='" + division + "', name='" + name + "', country='" + country + "'}";
+        return "Division{division='" + division + "', name='" + name + "', Pais='" + Pais + "'}";
     }
 }
